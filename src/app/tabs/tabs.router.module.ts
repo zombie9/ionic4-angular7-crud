@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { HomePage } from '../home/home.page';
-import { AddPage } from '../add/add.page';
-import { EditPage } from '../edit/edit.page';
-import { DetailsPage } from '../details/details.page';
 
 const routes: Routes = [
   {
@@ -12,35 +8,51 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: '',
-        redirectTo: '/tabs/(home:home)',
-        pathMatch: 'full',
-      },
-      {
         path: 'home',
-        outlet: 'home',
-        component: HomePage
+        children: [
+          {
+            path: '',
+            loadChildren: '../home/home.module#HomePageModule'
+          }
+        ]
       },
       {
         path: 'add',
-        outlet: 'add',
-        component: AddPage
+        children: [
+          {
+            path: '',
+            loadChildren: '../add/add.module#AddPageModule'
+          }
+        ]
       },
       {
-        path: ':id',
-        outlet: 'edit',
-        component: EditPage
+        path: 'edit',
+        children: [
+          {
+            path: ':id',
+            loadChildren: '../edit/edit.module#EditPageModule'
+          }
+        ]
       },
       {
-        path: ':id',
-        outlet: 'details',
-        component: DetailsPage
+        path: 'details',
+        children: [
+          {
+            path: ':id',
+            loadChildren: '../details/details.module#DetailsPageModule'
+          }
+        ]
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/home',
+        pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/(home:home)',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   }
 ];
