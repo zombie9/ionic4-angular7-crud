@@ -29,7 +29,7 @@ const routes: Routes = [
         path: 'edit',
         children: [
           {
-            path: ':id',
+            path: '',
             loadChildren: '../edit/edit.module#EditPageModule'
           }
         ]
@@ -38,7 +38,7 @@ const routes: Routes = [
         path: 'details',
         children: [
           {
-            path: ':id',
+            path: '',
             loadChildren: '../details/details.module#DetailsPageModule'
           }
         ]
